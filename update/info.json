@@ -9,26 +9,7 @@
 	"sections" : {
 		"description" : "Aktualizator do wtyczki Woocommerce-GLS",
 		"installation" : "",
-		"changelog" : "
-		<h4>0.9.2 - 15 grudnia, 2020</h4>
-		<ul>
-			<li>Możliwość wpisania kwoty pobrania ręcznie.</li>
-			<li>Pokazywanie okna 'Wysyłka GLS' tylko przy określonych zamówieniach.</li>
-			<li>Dodano moduł aktualizacji.</li>
-			<li>Kolejne poprawki optymalizacyjne.</li>
-		</ul>
-		<h4>0.9.1 - 10 grudnia, 2020</h4>
-		<ul>
-			<li>Poprawki optymalizacyjne.</li>
-		</ul>
-		<h4>0.9 – 3 grudzień, 2020</h4>
-		<ul>
-			<li>Poprawki optymalizacyjne.</li>
-		</ul>
-		<h4>0.1</h4>
-		<ul>
-			<li>Pierwsza opublikowana, działająca wersja.</li>
-		</ul>"
+		"changelog" : "<h4>0.9.2 - 15 grudnia, 2020</h4><ul><li>Możliwość wpisania kwoty pobrania ręcznie.</li><li>Pokazywanie okna 'Wysyłka GLS' tylko przy określonych zamówieniach.</li><li>Dodano moduł aktualizacji.</li><li>Kolejne poprawki optymalizacyjne.</li></ul><h4>0.9.1 - 10 grudnia, 2020</h4><ul><li>Poprawki optymalizacyjne.</li></ul><h4>0.9 – 3 grudzień, 2020</h4><ul><li>Poprawki optymalizacyjne.</li></ul><h4>0.1</h4><ul><li>Pierwsza opublikowana, działająca wersja.</li></ul>"
 	},
 	"banners" : {
 		"low" : "https://YOUR_WEBSITE/banner-772x250.jpg",
