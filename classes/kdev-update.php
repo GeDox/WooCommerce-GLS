@@ -53,23 +53,16 @@ class KDEV_GLS_Update {
 	}
 
 	public function kdev_plugin_info( $res, $action, $args ){
-		// do nothing if this is not about getting plugin information
 		if( 'plugin_information' !== $action ) {			
 			return false;
 		}
 	 
-		delete_transient( 'kdev_update_' . $this->plugin_info->slug );
-		
-		// do nothing if it is not our plugin
 		if( $this->plugin_info->slug !== $args->slug ) {
 			return false;
 		}
 	 
-		// trying to get from cache first
 		if( false == $remote = get_transient( 'kdev_update_' . $this->plugin_info->slug ) ) {
-	 
-			// info.json is the file with the actual plugin information on your server
-			$remote = wp_remote_get( 'https://raw.githubusercontent.com/GeDox/WooCommerce-GLS/main/update/info.json?raw=true', array(
+	 		$remote = wp_remote_get( 'https://raw.githubusercontent.com/GeDox/WooCommerce-GLS/main/update/info.json?raw=true', array(
 				'timeout' => 10,
 				'headers' => array(
 					'Accept' => 'application/json'
@@ -79,11 +72,9 @@ class KDEV_GLS_Update {
 			if ( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
 				set_transient( 'kdev_update_' . $this->plugin_info->slug, $remote, 43200 ); // 12 hours cache
 			}
-	 
 		}
 	 
 		if( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
-	 
 			$remote = json_decode( $remote['body'] );
 			$res = new stdClass();
 	 
@@ -102,11 +93,8 @@ class KDEV_GLS_Update {
 				'description' => $remote->sections->description,
 				'installation' => $remote->sections->installation,
 				'changelog' => $remote->sections->changelog
-				// you can add your custom sections (tabs) here
 			);
-	 
-			// in case you want the screenshots tab, use the following HTML format for its content:
-			// <ol><li><a href="IMG_URL" target="_blank"><img src="IMG_URL" alt="CAPTION" /></a><p>CAPTION</p></li></ol>
+
 			if( !empty( $remote->sections->screenshots ) ) {
 				$res->sections['screenshots'] = $remote->sections->screenshots;
 			}
@@ -115,7 +103,6 @@ class KDEV_GLS_Update {
 				'high' => 'https://github.com/GeDox/WooCommerce-GLS/blob/main/chrome_5JcAOvjb9H.png?raw=true'
 			);
 			return $res;
-	 
 		}
 	 
 		return false;
@@ -130,13 +117,11 @@ class KDEV_GLS_Update {
 	public function upgrader_post_install( $true, $hook_extra, $result ) {
 		global $wp_filesystem;
 
-		// Move & Activate
 		$proper_destination = WP_PLUGIN_DIR.'/'.$this->plugin_info->slug;
 		$wp_filesystem->move( $result['destination'], $proper_destination );
 		$result['destination'] = $proper_destination;
 		$activate = activate_plugin( WP_PLUGIN_DIR.'/'.$this->plugin_info->slug );
 
-		// Output the update message
 		$fail  = __( 'The plugin has been updated, but could not be reactivated. Please reactivate it manually.', 'github_plugin_updater' );
 		$success = __( 'Plugin reactivated successfully.', 'github_plugin_updater' );
 		echo is_wp_error( $activate ) ? $fail : $success;
